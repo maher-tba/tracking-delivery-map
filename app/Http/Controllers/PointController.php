@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\carTraker;
 use App\Models\Point;
 use App\Http\Requests\StorePointRequest;
 use App\Http\Requests\UpdatePointRequest;
@@ -28,8 +29,6 @@ class PointController extends Controller
     {
         //
     }
-
-
     public function store(Request $request)
     {
         $data = $this->validate($request, [
@@ -37,7 +36,7 @@ class PointController extends Controller
             'long' => 'required',
         ]);
 
-        Point::create([
+        $point =  Point::create([
             'lat' => $data['lat'],
             'long' => $data['long'],
         ]);
@@ -45,6 +44,8 @@ class PointController extends Controller
         // flash a success message to the session
         session()->flash('status', 'point Created!');
 
+        // move to new point
+        $this->move($point);
         // redirect to tasks index
         return redirect('/move');
     }
@@ -92,5 +93,9 @@ class PointController extends Controller
     public function destroy(Point $point)
     {
         //
+    }
+    public function move(Point $point)
+    {
+        event(new carTraker($point->lat,  $point->long));
     }
 }
