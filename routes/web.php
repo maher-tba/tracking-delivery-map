@@ -1,7 +1,9 @@
 <?php
 
+use App\Events\carTraker;
 use Illuminate\Support\Facades\Route;
-
+use App\Models\Point;
+use App\Http\Controllers\PointController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/move', function () {
+    return view('move');
+});
+
+Route::resource('points', PointController::class);
 
 Route::get('/run1', function (){
-    event(new \App\Events\carTraker(-23.344,  131.031));
-});
+    event(new carTraker(-23.344,  131.031));
+})->name('changeLocation');
