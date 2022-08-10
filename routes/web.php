@@ -25,6 +25,4 @@ Route::get('/move', function () {
 
 Route::resource('points', PointController::class);
 
-Route::get('/run1', function (){
-    event(new carTraker(-23.344,  131.031));
-})->name('changeLocation');
+

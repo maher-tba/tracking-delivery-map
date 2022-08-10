@@ -33,12 +33,12 @@ class PointController extends Controller
     {
         $data = $this->validate($request, [
             'lat' => 'required',
-            'long' => 'required',
+            'lng' => 'required',
         ]);
 
         $point =  Point::create([
             'lat' => $data['lat'],
-            'long' => $data['long'],
+            'lng' => $data['lng'],
         ]);
 
         // flash a success message to the session
@@ -96,6 +96,6 @@ class PointController extends Controller
     }
     public function move(Point $point)
     {
-        event(new carTraker($point->lat,  $point->long));
+        event(new carTraker($point->lat,  $point->lng));
     }
 }

@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label for="Location">Longitude</label>
-                    <input type="text" id="long" name="long" class="form-control" >
+                    <input type="text" id="lng" name="lng" class="form-control" >
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

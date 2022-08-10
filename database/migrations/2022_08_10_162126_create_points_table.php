@@ -16,7 +16,7 @@ class CreatePointsTable extends Migration
         Schema::create('points', function (Blueprint $table) {
             $table->id();
             $table->text('lat');
-            $table->text('long');
+            $table->text('lng');
             $table->timestamps();
         });
     }

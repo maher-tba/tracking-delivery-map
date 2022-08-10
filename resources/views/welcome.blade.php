@@ -6,26 +6,7 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>app</title>
     <script src="{{asset('js/app.js')}}"></script>
-{{--    <script src="https://js.pusher.com/7.2.0/pusher.min.js"></script>--}}
-    <script>
-        Pusher.logToConsole = true;
 
-        var pusher = new Pusher("7c0662889a8b9950e621", {
-            cluster: "eu",
-        });
-
-        // var channel = pusher.subscribe("trakerCar");
-
-
-        channel.bind("carTraker", (data) => {
-            console.log(JSON.stringify(data));
-        });
-
-        // channel.bind("carTraker", (data) => {
-        //     console.log(JSON.stringify(data));
-        //     alert(JSON.stringify(data));
-        // });
-    </script><!-- Fonts -->
     <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles -->
@@ -46,7 +27,6 @@
 
 </head>
 <body class="antialiased">
-<button >Update Postion 1</button>
 
 <div id="map"></div>
 <script
@@ -59,7 +39,7 @@
     let marker;
 
     function initMap() {
-        const uluru = { lat: -25.344, lng: 131.031 };
+        const uluru = { lat: 36.57734488723661, lng: 37.031061372413035 };
         // The map, centered at Uluru
         map = new google.maps.Map(document.getElementById("map"), {
             zoom: 10,
@@ -75,16 +55,15 @@
     function updatePosition1($lat,$lng)
     {
         const latLog = { lat: $lat, lng: $lng };
+        console.log(latLog);
         marker.setPosition(latLog);
         map.setCenter(latLog);
     }
 
-
-
     Echo.channel(`trakerCar`)
         .listen('carTraker', (e) => {
-            //console.log(e);
-            updatePosition1( -23.344,  131.031);
+            console.log(e);
+            updatePosition1( parseFloat(e.lat) ,  parseFloat(e.lng) );
         });
 
     window.initMap = initMap;

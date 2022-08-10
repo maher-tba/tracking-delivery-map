@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Point extends Model
 {
     use HasFactory;
-    protected $fillable  = ['lat' , 'long'];
+    protected $fillable  = ['lat' , 'lng'];
 }
